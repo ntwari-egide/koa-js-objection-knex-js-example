@@ -42,7 +42,7 @@ const config = require('../knexfile')
 module.exports = require('knex')(config)
 
 // MIGRATION
-// run -> knex migration create_users_and_todos_tables
+// run -> knex migrate:make create_users_and_todos_tables
 
 // SEED - You have to respect the sequence of relations
 // npx knex seed:make 01_users
