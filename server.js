@@ -25,6 +25,7 @@ const router = new KoaRouter()
 
 const knex = require('./knexfile')
 const Todo = require('./models/todo')
+const User = require('./models/user')
 
 // configuring knex and objection models
 Model.knex(knex)
@@ -61,6 +62,24 @@ router.get('/todos', async (ctx) => {
 
     return ctx.body = await Todo.query();
 })
+
+
+router.get('/users/latest', async (ctx) => {
+    return ctx.body = await User.query()
+    .select('id','full_name', 'email')
+    .where('id', '>', 1)
+    .orderBy('id', 'desc')
+})
+
+// use of modern  javascript in query builder
+
+router.get('/users/email-verification', async (ctx) => {
+    return ctx.body = await User.query()
+    .select('id','full_name', 'email')
+    .where( builder => builder.where('id', '<', 3).orWhere('email', 'like', '@test'))
+    .orderBy('id', 'desc')
+})
+
 
 router.get('/todos/:id', async (ctx) => {
     // return ctx.body = await knex

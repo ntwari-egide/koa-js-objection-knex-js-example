@@ -14,7 +14,7 @@ const options = {
             {
                 host : 'localhost',
                 port : 5432,
-                user : 'egide',
+                user : 'ntwari',
                 password : '123',
                 database : 'knex_object_koa_study'
             },
